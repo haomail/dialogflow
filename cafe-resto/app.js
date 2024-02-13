@@ -14,35 +14,48 @@ app.get("/", (req, res) => {
 
 app.post("/", express.json(), (request, response) => {
     const agent = new WebhookClient({ request, response });
-    
+
+    // 01_webhookDemo
+    const demo = (agent) => {
+        agent.add("Sending response from Webhook :)")
+    };
+
+    // 02_Open_Hours
     const openHours = (agent) => {
         agent.add("Kami buka dari [Jam Buka] hingga [Jam Tutup] setiap hari. Apakah ada yang lain yang dapat kami bantu?");
     };
 
+    // 03_Location
     const location = (agent) => {
         agent.add("[Nama Kafe/Restoran] terletak di [lokasi]. Kami berharap dapat menyambut Anda segera!");
     };
     
+    // 04_Wi-Fi
     const wifi = (agent) => {
         agent.add("Ya, kami menyediakan layanan Wi-Fi gratis untuk para pelanggan kami. Anda dapat mendapatkan kata sandi di kasir.");
     };
     
+    // 05_Promo
     const promo = (agent) => {
         agent.add("Kami memiliki beberapa promo dan diskon spesial. Untuk informasi terbaru, silakan kunjungi halaman promo di situs web kami.");
     };
 
+    // 06_Smoking_Area
     const smokingArea = (agent) => {
         agent.add("Tentu, kami menyediakan ruangan untuk merokok beserta dengan asbaknya.");
     };
     
+    // 07_Halal
     const halal = (agent) => {
         agent.add("Kami menggunakan bahan-bahan berkualitas yang diolah secara halal. Kami juga sudah memperoleh sertifikat Halal dari MUI dengan nomor [ID]");
     };
-      
+    
+    // 08_Live_Music
     const liveMusic = (agent) => {
         agent.add("Kami sering mengadakan pertunjukan musik langsung. Untuk jadwal acara terbaru, silakan cek situs web kami atau tanyakan kepada staf kami.");
     };
     
+    // 09_Delivery_Service
     const deliveryService = (agent) => {
         const deliveryData = {
             "richContent": [
@@ -69,6 +82,7 @@ app.post("/", express.json(), (request, response) => {
             agent.add(new dfff.Payload(agent.UNSPECIFIED, deliveryData, {sendAsMessage: true, rawPayload: true}));
   };
 
+  // 10_App_Delivery
   const appDelivery= (agent) => {
     const appData = {
         "richContent": [
@@ -116,6 +130,7 @@ app.post("/", express.json(), (request, response) => {
         agent.add(new dfff.Payload(agent.UNSPECIFIED, appData, { sendAsMessage: true, rawPayload: true }));
     }
     
+    // 11_Bot_Delivery
     const botDelivery = (agent) => {
         agent.add("Baik dengan kakak siapa ya namanya?")
   };
@@ -127,8 +142,9 @@ app.post("/", express.json(), (request, response) => {
         console.log(nama);
         console.log(telepon);
         console.log(alamat);
-    }; */
-
+    }; 
+    */
+    // 13_Order_Menu
     const orderMenu = (agent) => {
         const displayMenu = {
             "richContent": [
@@ -157,6 +173,7 @@ app.post("/", express.json(), (request, response) => {
             agent.add(new dfff.Payload(agent.UNSPECIFIED, displayMenu, {sendAsMessage: true, rawPayload: true}));
     };
 
+    // 14_Fix_Order
     const fixOrder = (agent) => {
         const nama = agent.context.get("data_costumer").parameters.person.name;
         const telepon = agent.context.get("data_costumer").parameters["phone-number"];
@@ -180,10 +197,12 @@ app.post("/", express.json(), (request, response) => {
             console.log("Order details added to DB"));
     };
   
+    // 15_Table_Reservation
     const tableReservation = (agent) => {
         agent.add("Reservasi meja dapat dilakukan minimal 1 jam sebelum kedatangan. Atas nama siapa kak?")
     };
 
+    // 16_Table_Reservation-Customer
     const tableReservationCostumer = (agent) => {
         const name = agent.parameters.name.name;
         const person = agent.parameters.person;
@@ -208,10 +227,12 @@ app.post("/", express.json(), (request, response) => {
             console.log("Table reservation details added to Database"));
     };
 
+    // 17_Reservasi_Acara
     const eventReservation = (agent) => {
         agent.add("Reservasi acara dapat dilakukan minimal H-2 sebelum kedatangan. Atas nama siapa kak?")
     };
 
+    // 18_Event_Reservation-Costumer
     const eventReservationCostumer = (agent) => {
         const name = agent.parameters.name.name;
         const event = agent.parameters.events;
@@ -238,22 +259,23 @@ app.post("/", express.json(), (request, response) => {
             console.log("Event reservation details added to Database"));
     }
     const intentMap = new Map();
-    intentMap.set('Open Hours', openHours);
-    intentMap.set('Location', location);
-    intentMap.set('Wi-Fi', wifi);
-    intentMap.set('Promo', promo);
-    intentMap.set('Smoking Area', smokingArea);
-    intentMap.set('Halal', halal);
-    intentMap.set('Live Music', liveMusic);
-    intentMap.set('Delivery Service', deliveryService);
-    intentMap.set('App Delivery', appDelivery);
-    intentMap.set('Bot Delivery', botDelivery);
-    intentMap.set('orderMenu', orderMenu);
-    intentMap.set('fixOrder', fixOrder);
-    intentMap.set('Table Reservation', tableReservation);
-    intentMap.set('Table Reservation-Customer', tableReservationCostumer);
-    intentMap.set('Reservasi Acara', eventReservation);
-    intentMap.set('Event Reservation-Customer', eventReservationCostumer);
+    intentMap.set('01_webhookDemo', demo);
+    intentMap.set('02_Open_Hours', openHours);
+    intentMap.set('03_Location', location);
+    intentMap.set('04_Wi-Fi', wifi);
+    intentMap.set('05_Promo', promo);
+    intentMap.set('06_Smoking_Area', smokingArea);
+    intentMap.set('07_Halal', halal);
+    intentMap.set('08_Live_Music', liveMusic);
+    intentMap.set('09_Delivery_Service', deliveryService);
+    intentMap.set('10_App_Delivery', appDelivery);
+    intentMap.set('11_Bot_Delivery', botDelivery);
+    intentMap.set('13_Order_Menu', orderMenu);
+    intentMap.set('14_Fix_Order', fixOrder);
+    intentMap.set('15_Table_Reservation', tableReservation);
+    intentMap.set('16_Table_Reservation-Customer', tableReservationCostumer);
+    intentMap.set('17_Event_Reservation', eventReservation);
+    intentMap.set('18_Event_Reservation-Costumer', eventReservationCostumer);
     agent.handleRequest(intentMap);
 });
 
