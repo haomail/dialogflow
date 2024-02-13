@@ -46,7 +46,7 @@ app.post('/', express.json(), (req, res)=>{
       console.log(email);
       console.log(date);
 
-      agent.add('Halo ${name}, email anda: ${email}, dan tanggal reservasi: ${date}. \nKami telah mengkonfirmasi reservasi anda. Apakah anda akan melanjutkan pemesanan?');
+      agent.add(`Halo ${name}, email anda: ${email}, dan tanggal reservasi: ${date}. \nKami telah mengkonfirmasi reservasi anda. Apakah anda akan melanjutkan pemesanan?`);
 
       var ConfirmData = {
         "richContent": [
