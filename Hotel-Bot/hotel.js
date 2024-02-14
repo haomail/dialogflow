@@ -41,12 +41,19 @@ app.post('/', express.json(), (req, res)=>{
       var name = agent.parameters.name.name;
       var email = agent.parameters.email;
       var date = agent.parameters.date;
+      var dateNew = new Date(date);
+      var formattedDate =  dateNew.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
 
       console.log(name);
       console.log(email);
       console.log(date);
+      console.log(formattedDate);
 
-      agent.add(`Halo ${name}, email anda: ${email}, dan tanggal reservasi: ${date}. \nKami telah mengkonfirmasi reservasi anda. Apakah anda akan melanjutkan pemesanan?`);
+      agent.add(`Halo ${name}, email anda: ${email}, dan tanggal reservasi: ${formattedDate}. \nKami telah mengkonfirmasi reservasi anda. Apakah anda akan melanjutkan pemesanan?`);
 
       var ConfirmData = {
         "richContent": [
