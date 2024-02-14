@@ -79,7 +79,7 @@ app.post("/", express.json(), (request, response) => {
                 ],
               ],
             };
-            agent.add(new dfff.Payload(agent.UNSPECIFIED, deliveryData, {sendAsMessage: true, rawPayload: true}));
+            agent.add(new Payload(agent.UNSPECIFIED, deliveryData, {sendAsMessage: true, rawPayload: true}));
   };
 
   // 10_App_Delivery
@@ -127,7 +127,7 @@ app.post("/", express.json(), (request, response) => {
             ],
           ],
         };
-        agent.add(new dfff.Payload(agent.UNSPECIFIED, appData, { sendAsMessage: true, rawPayload: true }));
+        agent.add(new Payload(agent.UNSPECIFIED, appData, { sendAsMessage: true, rawPayload: true }));
     }
     
     // 11_Bot_Delivery
@@ -170,7 +170,7 @@ app.post("/", express.json(), (request, response) => {
                 ]
               ]
             } 
-            agent.add(new dfff.Payload(agent.UNSPECIFIED, displayMenu, {sendAsMessage: true, rawPayload: true}));
+            agent.add(new Payload(agent.UNSPECIFIED, displayMenu, {sendAsMessage: true, rawPayload: true}));
     };
 
     // 14_Fix_Order
@@ -257,7 +257,30 @@ app.post("/", express.json(), (request, response) => {
         time: time
         }).then(ref =>
             console.log("Event reservation details added to Database"));
-    }
+    };
+
+    // 19_About_Us
+    const aboutUs = (agent) => {
+      const aboutUsDescription = {
+        "richContent": [
+          [
+            {
+              "type": "image",
+              "rawUrl": "https://img.freepik.com/premium-photo/restaurant-with-sign-that-says-cafe-it_900958-31184.jpg",
+              "accessibilityText": "Pojok Kafe"
+            },
+            {
+              "type": "info",
+              "title": "Pojok Kafe",
+              "subtitle": "Selamat datang di Pojok Kafe - tempat yang menyediakan suasana santai dan kopi berkualitas tinggi. Nikmati beragam varian kopi dari berbagai belahan dunia sambil menikmati suasana yang hangat dan ramah. Pojok Kafe adalah tempat ideal untuk bersantai, bekerja, atau bertemu dengan teman-teman sambil menikmati hidangan ringan yang lezat."
+            }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, aboutUsDescription, {sendAsMessage: true, rawPayload: true}))
+    };
+
+    // 
     const intentMap = new Map();
     intentMap.set('01_webhookDemo', demo);
     intentMap.set('02_Open_Hours', openHours);
@@ -276,6 +299,7 @@ app.post("/", express.json(), (request, response) => {
     intentMap.set('16_Table_Reservation-Customer', tableReservationCostumer);
     intentMap.set('17_Event_Reservation', eventReservation);
     intentMap.set('18_Event_Reservation-Costumer', eventReservationCostumer);
+    intentMap.set('19_About_Us', aboutUs);
     agent.handleRequest(intentMap);
 });
 
