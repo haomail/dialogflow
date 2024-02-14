@@ -1,7 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisata Indonesia</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+        .nav {
+            background-color: #343a40;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 18px;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card-title {
+            margin-top: 0;
+            font-size: 24px;
+            color: #333;
+        }
+        .card-description {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Wisata Indonesia</h1>
+    </div>
+    <div class="nav">
+        <a href="#">Beranda</a>
+        <a href="#">Destinasi</a>
+        <a href="#">Paket Wisata</a>
+        <a href="#">Tentang Kami</a>
+        <a href="#">Kontak</a>
+    </div>
+    <div class="container">
+        <div class="card">
+            <img src="tempat-wisata1.jpg" alt="Tempat Wisata 1">
+            <div class="card-content">
+                <h2 class="card-title">Pulau Bali</h2>
+                <p class="card-description">Nikmati keindahan alam dan kebudayaan Bali yang menakjubkan.</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="tempat-wisata2.jpg" alt="Tempat Wisata 2">
+            <div class="card-content">
+                <h2 class="card-title">Taman Nasional Komodo</h2>
+                <p class="card-description">Jelajahi keajaiban alam pulau Komodo dan lihatlah naga hidup yang langka.</p>
+            </div>
+        </div>
+        <!-- Tambahkan lebih banyak card untuk tempat wisata lainnya -->
+    </div>
+</body>
+</html>
+
 <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 <df-messenger
   intent="WELCOME"
   chat-title="Wisata_Agent"
   agent-id="045fefb7-6cd7-4a74-bf60-53809fd57d4d"
   language-code="en"
+  chat-icon="https://braincore.id/static/images/favicon.png"
 ></df-messenger>
