@@ -1,7 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot TravelYo!</title>
+  <style>
+    df-messenger {
+      --df-messenger-bot-message: #7ead48;
+      --df-messenger-button-titlebar-color: rgb(88, 156, 68);
+      --df-messenger-chat-background-color: #ffffff;
+      --df-messenger-font-color: rgb(253, 248, 248);
+      --df-messenger-input-box-color: rgb(88, 156, 68);
+      --df-messenger-input-font-color: white;
+      --df-messenger-input-placeholder-font-color: #ffffffee;
+      --df-messenger-minimized-chat-close-icon-color: #409146;
+      --df-messenger-send-icon: #1e6b14;
+      --df-messenger-user-message: #409146;
+    }
+  </style>
+</head>
+<body>
+
 <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 <df-messenger
   intent="WELCOME"
   chat-title="TravelYo!"
+  chat-icon="https://logodix.com/logo/450225.png"
   agent-id="068593a9-12f4-4032-8e6f-903ae800d559"
   language-code="en"
 ></df-messenger>
+
+</body>
+</html>
