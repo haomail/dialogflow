@@ -280,7 +280,11 @@ app.post("/", express.json(), (request, response) => {
       agent.add(new Payload(agent.UNSPECIFIED, aboutUsDescription, {sendAsMessage: true, rawPayload: true}))
     };
 
-    // 
+    // 20_Feedback
+    const feedback = (agent) => {
+      agent.add("Kami sangat menghargai umpan balik dari pelanggan. Jika kamu memiliki waktu, silakan berikan ulasan kamu di platform ulasan favorit kamu atau langsung kirim feedbackmu melalui bot ini!")
+    };
+
     const intentMap = new Map();
     intentMap.set('01_webhookDemo', demo);
     intentMap.set('02_Open_Hours', openHours);
@@ -300,6 +304,7 @@ app.post("/", express.json(), (request, response) => {
     intentMap.set('17_Event_Reservation', eventReservation);
     intentMap.set('18_Event_Reservation-Costumer', eventReservationCostumer);
     intentMap.set('19_About_Us', aboutUs);
+    intentMap.set('20_Feedback', feedback);
     agent.handleRequest(intentMap);
 });
 
