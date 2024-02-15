@@ -285,6 +285,23 @@ app.post("/", express.json(), (request, response) => {
       agent.add("Kami sangat menghargai umpan balik dari pelanggan. Jika kamu memiliki waktu, silakan berikan ulasan kamu di platform ulasan favorit kamu atau langsung kirim feedbackmu melalui bot ini!")
     };
 
+    // 21_Feedback-Costumer
+    const feedbackCostumer = (agent) => {
+      nama = agent.parameters.name.name;
+      saran = agent.parameters.feedback;
+      phoneNumber = agent.parameters.phonenumber;
+      console.log(nama);
+      console.log(saran);
+      console.log(phoneNumber);
+      agent.add(`Terimakasih atas feedbacknya kak ${nama}, saran dari kakak sangat bermanfaat untuk perbaikan pelayanan kami :)`)
+      return db.collection("feedback").add({
+        name: nama,
+        feedback: saran,
+        phoneNumber: phoneNumber
+      }).then(ref =>
+        console.log("Feedback added to Database"));
+    };
+
     const intentMap = new Map();
     intentMap.set('01_webhookDemo', demo);
     intentMap.set('02_Open_Hours', openHours);
@@ -305,6 +322,7 @@ app.post("/", express.json(), (request, response) => {
     intentMap.set('18_Event_Reservation-Costumer', eventReservationCostumer);
     intentMap.set('19_About_Us', aboutUs);
     intentMap.set('20_Feedback', feedback);
+    intentMap.set('21_Feedback-Costumer', feedbackCostumer);
     agent.handleRequest(intentMap);
 });
 
