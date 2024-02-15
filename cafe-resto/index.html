@@ -1,7 +1,31 @@
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-  intent="WELCOME"
-  chat-title="EatBuddy"
-  agent-id="55f368ac-9ff1-4e39-952c-a8615da1e64d"
-  language-code="id"
-></df-messenger>
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <style>
+      df-messenger {
+       --df-messenger-bot-message: #ded0b6;
+       --df-messenger-button-titlebar-color: #776b5d;
+       --df-messenger-button-titlebar-font-color: black;
+       --df-messenger-input-box-color: white;
+       --df-messenger-input-placeholder-font-color: black;
+       --df-messenger-minimized-chat-close-icon-color: #ded0b6;
+       --df-messenger-chat-background-color: #faf6f0;
+       --df-messenger-font-color: black;
+       --df-messenger-send-icon: #776b5d;
+       --df-messenger-user-message: #b2a59b;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+      intent="WELCOME"
+      chat-title="EatBuddy"
+      chat-icon="https://cdn.discordapp.com/attachments/1162781673952379003/1207722882306670592/image.png?ex=65e0ae95&is=65ce3995&hm=6091dc7a205e504df5cb9fac3d6525f479cdf6fd1c5d2d6023ddf252ba67ddd2&"
+      agent-id="55f368ac-9ff1-4e39-952c-a8615da1e64d"
+      language-code="id"
+    ></df-messenger>
+  </body>
+</html>
+
+
