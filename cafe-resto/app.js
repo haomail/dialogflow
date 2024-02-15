@@ -301,6 +301,28 @@ app.post("/", express.json(), (request, response) => {
       }).then(ref =>
         console.log("Feedback added to Database"));
     };
+    
+    // 22_Problem
+    const problem = (agent) => {
+      agent.add("Ada permasalahan yang dapat kami bantu terkait pelayanan kami kak?")
+    };
+
+    // 23_Problem-Costumer
+    const problemCostumer = (agent) => {
+      nama = agent.parameters.name.name,
+      masalah = agent.parameters.problem,
+      phoneNumber = agent.parameters.phonenumber,
+      console.log(nama);
+      console.log(masalah);
+      console.log(phoneNumber);
+      agent.add(`Maaf atas ketidaknyamanannya kak ${nama}, staff kami akan segera menghubungi kakak`);
+      return db.collection("problem").add({
+        name: nama,
+        problem: masalah,
+        phoneNumber: phoneNumber
+      }).then(ref =>
+        console.log("Problem added to Database"));
+    };
 
     const intentMap = new Map();
     intentMap.set('01_webhookDemo', demo);
@@ -323,6 +345,8 @@ app.post("/", express.json(), (request, response) => {
     intentMap.set('19_About_Us', aboutUs);
     intentMap.set('20_Feedback', feedback);
     intentMap.set('21_Feedback-Costumer', feedbackCostumer);
+    intentMap.set('22_Problem', problem);
+    intentMap.set('23_Problem-Costumer', problemCostumer);
     agent.handleRequest(intentMap);
 });
 
