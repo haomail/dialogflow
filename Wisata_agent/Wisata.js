@@ -423,8 +423,201 @@ app.post('/', express.json(), (req, res)=>{
     
         agent.add(new dfff.Payload(agent.UNSPECIFIED, KeamananAturanResponse, { sendAsMessage: true, rawPayload: true }));
     }
-    
+    // Pengalaman untuk Anak-anak
+    function PengalamanAnak(agent) {
+        const PengalamanAnakResponse = {
+            "richContent": [
+                {
+                    "type": "info",
+                    "title": "Kegiatan untuk Anak-Anak",
+                    "subtitle": "Tentu! Kami memiliki kegiatan khusus untuk anak-anak.",
+                    "image": {
+                        "src": {
+                            "rawUrl": "https://example.com/kegiatan-anak.jpg"
+                        }
+                    },
+                    "text": "Kami menawarkan berbagai kegiatan yang menyenangkan untuk anak-anak, seperti Kegiatan Anak 1 dan Kegiatan Anak 2. Mereka pasti akan menikmati waktu mereka di sini."
+                }
+            ]
+        };
+        agent.add(new dfff.Payload(agent.UNSPECIFIED, PengalamanAnakResponse, { sendAsMessage: true, rawPayload: true }));
+    }
 
+    // Saran Rute Wisata
+
+    function SaranRuteWisata(agent) {
+        const SaranRuteWisataResponse = {
+            "richContent": [
+                {
+                    "type": "info",
+                    "title": "Saran Rute Wisata",
+                    "subtitle": "Tentu! Kami memiliki berbagai opsi rencana kunjungan sehari yang dapat disesuaikan dengan preferensi Anda.",
+                    "text": "Beberapa ide rute harian yang populer termasuk Acara 1 dan Acara 2. Selain itu, Anda bisa menikmati kegiatan seperti Kegiatan 1 dan Kegiatan 2. Jika Anda memiliki pertanyaan lebih lanjut atau butuh rekomendasi khusus, jangan ragu untuk bertanya!",
+                    "link": "https://www.google.com/maps?q=lokasi"
+                }
+            ]
+        };
+        agent.add(new dfff.Payload(agent.UNSPECIFIED, SaranRuteWisataResponse, { sendAsMessage: true, rawPayload: true }));
+    }
+
+    // Tempat Belanja di Sekitar
+    function TempatBelanjaSekitar(agent) {
+        const TempatBelanjaSekitarResponse = {
+            "richContent": [
+                {
+                    "type": "info",
+                    "title": "Tempat Belanja Sekitar",
+                    "subtitle": "Tentu! Kami memiliki berbagai acara dan kegiatan di sekitar wilayah ini.",
+                    "text": "Kami secara reguler mengadakan acara seperti festival budaya dan pasar seni lokal. Anda juga dapat menikmati kegiatan seperti tur sejarah dan wisata kuliner. Apabila Anda tertarik dengan tempat belanja, terdapat beberapa toko dan pasar yang menarik di sekitar area wisata kami."
+                }
+            ]
+        };
+        agent.add(new dfff.Payload(agent.UNSPECIFIED, TempatBelanjaSekitarResponse, { sendAsMessage: true, rawPayload: true }));
+    }
+
+    //  Tempat Foto Instagramable
+    function TempatFotoInstagramable(agent) {
+        const TempatFotoInstagramableResponse = {
+            "richContent": [
+                {
+                    "type": "info",
+                    "title": "Tempat Foto Instagramable",
+                    "subtitle": "Tentu! Di sini kami memiliki banyak lokasi yang sangat cocok untuk berfoto.",
+                    "text": "Anda akan menemukan banyak tempat menarik yang sempurna untuk berfoto di media sosial Anda. Berikut adalah beberapa tempat foto yang sering dikunjungi oleh pengunjung kami:",
+                    "image": {
+                        "src": "https://example.com/tempat-foto-1.jpg",
+                        "accessibilityText": "Contoh foto di tempat foto Instagramable 1"
+                    }
+                },
+                {
+                    "type": "info",
+                    "text": "1. Tempat Foto 1"
+                },
+                {
+                    "image": {
+                        "src": "https://example.com/tempat-foto-2.jpg",
+                        "accessibilityText": "Contoh foto di tempat foto Instagramable 2"
+                    }
+                },
+                {
+                    "type": "info",
+                    "text": "2. Tempat Foto 2"
+                },
+                {
+                    "image": {
+                        "src": "https://example.com/tempat-foto-3.jpg",
+                        "accessibilityText": "Contoh foto di tempat foto Instagramable 3"
+                    }
+                },
+                {
+                    "type": "info",
+                    "text": "3. Tempat Foto 3"
+                },
+                {
+                    "image": {
+                        "src": "https://example.com/tempat-foto-4.jpg",
+                        "accessibilityText": "Contoh foto di tempat foto Instagramable 4"
+                    }
+                },
+                {
+                    "type": "info",
+                    "text": "4. Tempat Foto 4"
+                },
+                {
+                    "image": {
+                        "src": "https://example.com/tempat-foto-5.jpg",
+                        "accessibilityText": "Contoh foto di tempat foto Instagramable 5"
+                    }
+                },
+                {
+                    "type": "info",
+                    "text": "5. Tempat Foto 5"
+                }
+            ]
+        };
+        agent.add(new dfff.Payload(agent.UNSPECIFIED, TempatFotoInstagramableResponse, { sendAsMessage: true, rawPayload: true }));
+    }
+
+    // Tempat Makan Terdekat
+    function TempatMakanTerdekat(agent) {
+        const TempatMakanTerdekatResponse = {
+            "richContent": [
+                {
+                    "type": "info",
+                    "title": "Tempat Makan Terdekat",
+                    "subtitle": "Tentu! Di sekitar wilayah wisata kami terdapat berbagai pilihan tempat makan yang lezat.",
+                    "text": "Anda dapat menemukan makanan khas daerah kami di berbagai restoran lokal. Beberapa tempat makan yang populer di sekitar wilayah kami termasuk:",
+                    "image": {
+                        "src": "https://example.com/restoran-makanan.jpg",
+                        "accessibilityText": "Contoh gambar restoran makanan di sekitar wilayah wisata"
+                    }
+                },
+                {
+                    "type": "info",
+                    "text": "1. Restoran A"
+                },
+                {
+                    "type": "info",
+                    "text": "2. Warung B"
+                },
+                {
+                    "type": "info",
+                    "text": "3. Kedai C"
+                },
+                {
+                    "type": "info",
+                    "text": "4. Rumah Makan D"
+                },
+                {
+                    "type": "info",
+                    "text": "5. Restoran E"
+                }
+            ]
+        };
+        agent.add(new dfff.Payload(agent.UNSPECIFIED, TempatMakanTerdekatResponse, { sendAsMessage: true, rawPayload: true }));
+    }
+
+    // Tempat Parkir
+    function TempatParkir(agent) {
+        const KetersediaanParkirResponse = {
+            "richContent": [
+                {
+                    "type": "info",
+                    "title": "Ketersediaan Tempat Parkir",
+                    "subtitle": "Tentu! Kami memiliki fasilitas parkir yang nyaman untuk pengunjung kami.",
+                    "text": "Kami menyediakan area parkir yang luas dan aman di sekitar wilayah wisata kami. Anda dapat dengan mudah menemukan tempat parkir untuk kendaraan Anda saat mengunjungi kami."
+                },
+                {
+                    "type": "image",
+                    "rawUrl": "https://example.com/tempat-parkir.jpg",
+                    "accessibilityText": "Contoh gambar area parkir di tempat wisata"
+                }
+            ]
+        };
+        agent.add(new dfff.Payload(agent.UNSPECIFIED, KetersediaanParkirResponse, { sendAsMessage: true, rawPayload: true }));
+    }
+    
+    // TentangDestinasiWisata 
+    function TentangDestinasiWisata(agent) {
+        const InformasiWisataResponse = {
+            "richContent": [
+                {
+                    "type": "info",
+                    "title": "Informasi tentang Wisata A",
+                    "subtitle": "Tentang Wisata A",
+                    "text": "Wisata A adalah destinasi populer yang menawarkan berbagai pengalaman menarik bagi pengunjungnya. Dengan pemandangan alam yang memukau, atraksi budaya yang kaya, dan beragam kegiatan rekreasi, Wisata A menjadi tujuan favorit bagi wisatawan dari berbagai kalangan."
+                },
+                {
+                    "type": "image",
+                    "rawUrl": "https://example.com/wisata-a.jpg",
+                    "accessibilityText": "Gambar Wisata A"
+                }
+            ]
+        };
+        agent.add(new dfff.Payload(agent.UNSPECIFIED, InformasiWisataResponse, { sendAsMessage: true, rawPayload: true }));
+    }
+    
+    //TentangDestinasiWisata
     function FinalConfirmation(agent){
         var name = agent.context.get("awaiting_name").parameters["given-name"];
         var email = agent.context.get("awaiting_email").parameters.email;
@@ -455,7 +648,14 @@ app.post('/', express.json(), (req, res)=>{
     intentMap.set('Jam Buka', JamBuka);
     intentMap.set('Jelajahi Tempat', JelajahiTempat);
     intentMap.set('Keamanan dan Aturan', KeamananAturan);
-
+    intentMap.set('Pengalaman untuk Anak-anak', PengalamanAnak);
+    intentMap.set('Saran Rute Wisata', SaranRuteWisata);
+    intentMap.set('Tempat Belanja di Sekitar', TempatBelanjaSekitar);
+    intentMap.set('Tempat Foto Instagramable',  TempatFotoInstagramable);
+    intentMap.set('Tempat Makan Terdekat', TempatMakanTerdekat);
+    intentMap.set('Tempat Parkir', TempatParkir);
+    intentMap.set('Tentang Destinasi Wisata', TentangDestinasiWisata);
+    
     agent.handleRequest(intentMap);
 
 app.listen(8000, ()=>console.log("Server is live at port 8000"));
