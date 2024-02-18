@@ -14,7 +14,67 @@ app.get("/", (req, res) => {
 
 app.post("/", express.json(), (request, response) => {
     const agent = new WebhookClient({ request, response });
-
+/*
+    // 00_Welcome
+    const welcome = (agent) => {
+      const responses = {
+        "richContent": [
+          [
+            {
+              "subtitle": "Pesan tiketmu sekarang!",
+              "title": "Pesan Tiket",
+              "type": "list",
+              "event": {
+                "languageCode": "",
+                "name": "ticket_booking",
+                "parameters": {}
+              }
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "title": "Layanan",
+              "subtitle": "Layanan yang kami sediakan khusus untuk kamu :)",
+              "event": {
+                "languageCode": "",
+                "name": "services",
+                "parameters": {}
+              },
+              "type": "list"
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "subtitle": "Mari berkenalan dengan kami!",
+              "type": "list",
+              "title": "Tentang Kami",
+              "event": {
+                "name": "about_us",
+                "parameters": {},
+                "languageCode": ""
+              }
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "subtitle": "Sampaikan keluhanmu, kami siap membantu :)",
+              "title": "Keluhan",
+              "type": "list",
+              "event": {
+                "name": "problem",
+                "languageCode": "",
+                "parameters": {}
+              }
+            }
+          ]
+        ]
+      };
+      agent.add(new Payload(agent.UNSPECIFIED, responses, {sendAsMessages: true, rawPayload: true}));
+    };
+*/
     // 01_Demo
     const demo = (agent) => {
         agent.add("Sending response from Webhook")
@@ -23,7 +83,7 @@ app.post("/", express.json(), (request, response) => {
     // 02_Ticket_Booking
     const ticketBooking = (agent) => {
         agent.add("Untuk memesan, Anda dapat memesan langsung dari website ini atau melalui aplikasi pemesanan tiket sebagai berikut:");
-        const response = {
+        const responses = {
             "richContent": [
               [
                 {
@@ -52,6 +112,7 @@ app.post("/", express.json(), (request, response) => {
               ]
             ]
           }
+        agent.add(new Payload(agent.UNSPECIFIED, responses, {sendAsMessages: true, rawPayload: true}));
     };
 
     // 03_Website_Booking
@@ -115,6 +176,7 @@ app.post("/", express.json(), (request, response) => {
     };
 
     const intentMap = new Map();
+//    intentMap.set('00_Welcome', welcome);
     intentMap.set('01_Demo', demo);
     intentMap.set('02_Ticket_Booking', ticketBooking);
     intentMap.set('03_Website_Booking', websiteBooking);
