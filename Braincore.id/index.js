@@ -14,7 +14,7 @@ try {
     console.log("Connected to DB");
 } catch (error) {
     console.error("Error connecting to DB:", error);
-    process.exit(1); // Stop further execution on critical error
+    process.exit(1); 
 }
 
 var db = admin.firestore();
@@ -32,46 +32,55 @@ app.post('/', express.json(), (req, res) => {
     });
     
         // 01_Demo
-        const demo = (agent) => {
+        const demo = (agent, eventName) => {
             agent.add("Halo, aku Zira yang akan menjawab pertanyaan seputar Braincore😊");
             const pengenalan = {
                 "richContent": [
-                [
-                    {
-                        "type": "info",
-                        "subtitle": "Ada sesuatu yang ingin kamu tahu dari Braincore?"
-                    },
-                    {
-                        "type": "divider"
-                    },
-                    {
-                        "type": "list",
-                        "subtitle": "Klik untuk informasi lengkap tentang layanan dan produk Braincore.",
-                        "title": "Informasi Layanan",
-                        "event": {
-                        "languageCode": "",
-                        "name": "LayananBraincoreId",
-                        "parameters": {}
-                    }
-                    },
-                    {
-                    "type": "divider"
-                    },
-                    {
-                        "type": "list",
-                        "subtitle": "Kamu bisa konsultasi dengan tim kami jika punya pertanyaan.",
-                        "title": "Konsultasi",
-                        "event": {
-                        "name": "Cara_melakukan_Konsultasi",
-                        "languageCode": "",
-                        "parameters": {}
-                    }
-                    }
+                    [
+                        {
+                            "type": "info",
+                            "subtitle": "Ada sesuatu yang ingin kamu tahu dari Braincore?"
+                        },
+                        {
+                            "type": "divider"
+                        },
+                        {
+                            "type": "list",
+                            "subtitle": "Klik untuk informasi lengkap tentang layanan dan produk Braincore.",
+                            "title": "Informasi Layanan",
+                            "event": {
+                                "languageCode": "",
+                                "name": "LayananBraincoreId",
+                                "parameters": {}
+                            }
+                        },
+                        {
+                            "type": "divider"
+                        },
+                        {
+                            "type": "list",
+                            "subtitle": "Kamu bisa konsultasi dengan tim kami jika punya pertanyaan.",
+                            "title": "Konsultasi",
+                            "event": {
+                                "name": "Cara_melakukan_Konsultasi",
+                                "languageCode": "",
+                                "parameters": {}
+                            }
+                        }
+                    ]
                 ]
-                ]
-            }
-            agent.add(new Payload(agent.UNSPECIFIED, pengenalan, {sendAsMessage: true, rawPayload: true}));
             };
+        
+            if (eventName === "LayananBraincoreId") {
+                LayananBraincoreId(agent);
+            } else if (eventName === "Cara_melakukan_Konsultasi") {
+                Cara_melakukan_Konsultasi(agent); 
+            }
+        
+            agent.add(new Payload(agent.UNSPECIFIED, pengenalan, { sendAsMessage: true, rawPayload: true }));
+        };
+        
+        demo(agent, "LayananBraincoreId");
             
         
           // 0_Fallback
