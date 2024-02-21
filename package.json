@@ -1,0 +1,15 @@
+{
+  "name": "dialogflow",
+  "version": "1.0.0",
+  "description": "<p>Chatbot menggunakan dialogflow webhook untuk keperluan:</p>\r <p>- Cafe/Restaurant </p>\r <p>- PO Bus </p>\r <p>- Travel </p>\r <p>- Hotel </p>\r <p>- Wisata Agent </p>\r <p>- Braincore.id </p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
