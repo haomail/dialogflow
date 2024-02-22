@@ -4,23 +4,6 @@ const dfff = require('dialogflow-fulfillment');
 const bodyParser = require('body-parser');
 const { WebhookClient } = require('dialogflow-fulfillment');
 
-var admin = require("firebase-admin");
-var serviceAccount = require("./stbot-f1e78-firebase-adminsdk-ih2ag-e6afe80ba2.json");
-
-try {
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount)
-    });
-    console.log("Connected to DB");
-} catch (error) {
-    console.error("Error connecting to DB:", error);
-    process.exit(1); 
-}
-
-var db = admin.firestore();
-
-app.use(bodyParser.json());
-
 app.get('/', (req, res) => {
     res.send("We are live")
 });
@@ -30,59 +13,7 @@ app.post('/', express.json(), (req, res) => {
         request: req,
         response: res
     });
-    
-        // 01_Demo
-        const demo = (agent, eventName) => {
-            agent.add("Halo, aku Zira yang akan menjawab pertanyaan seputar Braincore😊");
-            const pengenalan = {
-                "richContent": [
-                    [
-                        {
-                            "type": "info",
-                            "subtitle": "Ada sesuatu yang ingin kamu tahu dari Braincore?"
-                        },
-                        {
-                            "type": "divider"
-                        },
-                        {
-                            "type": "list",
-                            "subtitle": "Klik untuk informasi lengkap tentang layanan dan produk Braincore.",
-                            "title": "Informasi Layanan",
-                            "event": {
-                                "languageCode": "",
-                                "name": "LayananBraincoreId",
-                                "parameters": {}
-                            }
-                        },
-                        {
-                            "type": "divider"
-                        },
-                        {
-                            "type": "list",
-                            "subtitle": "Kamu bisa konsultasi dengan tim kami jika punya pertanyaan.",
-                            "title": "Konsultasi",
-                            "event": {
-                                "name": "Cara_melakukan_Konsultasi",
-                                "languageCode": "",
-                                "parameters": {}
-                            }
-                        }
-                    ]
-                ]
-            };
-        
-            if (eventName === "LayananBraincoreId") {
-                LayananBraincoreId(agent);
-            } else if (eventName === "Cara_melakukan_Konsultasi") {
-                Cara_melakukan_Konsultasi(agent); 
-            }
-        
-            agent.add(new Payload(agent.UNSPECIFIED, pengenalan, { sendAsMessage: true, rawPayload: true }));
-        };
-        
-        demo(agent, "LayananBraincoreId");
-            
-        
+
           // 0_Fallback
         const handleFallback = async (agent) => {
             const queryText = agent.query; // Get the user's input
@@ -95,30 +26,40 @@ app.post('/', express.json(), (req, res) => {
         };
         
           // 02_Lokasi_Braincore
-        const lokasiBraincore = (agent) => {
-            agent.add("Anda dapat mengunjungi kami pada alamat berikut: ");
-            const lokasiData = {
-            "richContent": [
-                [
-                {
-                    "actionLink": "https://maps.app.goo.gl/HBtyegxVCoi4UiM8A",
-                    "image": {
-                    "src": {
-                        "rawUrl": "https://braincore.id/static/images/favicon.png"
-                    }
-                    },
-                    "type": "info",
-                    "subtitle": "Lokasi Braincore"
-                }
+          const lokasiBraincore = (agent) => {
+            agent.add("Jl. Letjen S. Parman No.28  Grogol Petamburan Kota Jakarta Barat Daerah Khusus Ibukota Jakarta 11470 ")
+            var lokasiData = {
+                "richContent": [
+                    [
+                        {
+                            "type": "info",
+                            "subtitle": "PT. ALGONACCI SOBAT NUSANTARA",
+                            "text": [
+                                "Jl. Letjen S. Parman No.28",
+                                "Grogol Petamburan",
+                                "Kota Jakarta Barat",
+                                "Daerah Khusus Ibukota Jakarta 11470"
+                            ]
+                        },
+                        {
+                            "type": "info",
+                            "subtitle": "Lokasi Braincore",
+                            "image": {
+                                "src": {
+                                    "rawUrl": "https://braincore.id/static/images/favicon.png"
+                                }
+                            },
+                            "actionLink": "https://maps.app.goo.gl/HBtyegxVCoi4UiM8A"
+                        }
+                    ]
                 ]
-            ]
             };
-            agent.add(new Payload(agent.UNSPECIFIED, lokasiData, {sendAsMessage: true, rawPayload: true}));
+            agent.add(new dfff.Payload(agent.UNSPECIFIED, lokasiData, {sendAsMessage: true, rawPayload: true}));
         }
-        
+
           // 05_AI_sektor_pertanian
         const SektorPertanian = (agent) => {
-            const PertanianData = {
+            var PertanianData = {
             "richContent": [
                 [
                 {
@@ -135,7 +76,7 @@ app.post('/', express.json(), (req, res) => {
                 ]
             ]
             };
-            agent.add(new Payload(agent.UNSPECIFIED, PertanianData, {sendAsMessage: true, rawPayload: true}));
+            agent.add(new dfff.Payload(agent.UNSPECIFIED, PertanianData, {sendAsMessage: true, rawPayload: true}));
         }
         
           // 11_Kontak_Braincore.id
@@ -181,7 +122,7 @@ app.post('/', express.json(), (req, res) => {
                     }
                 ]
                 ]
-            };agent.add(new Payload(agent.UNSPECIFIED, KontakData, {sendAsMessage: true, rawPayload: true}));
+            };agent.add(new dfff.Payload(agent.UNSPECIFIED, KontakData, {sendAsMessage: true, rawPayload: true}));
             }
         
           // 16_Tentang_Braincore.id
@@ -214,7 +155,7 @@ app.post('/', express.json(), (req, res) => {
                 ]
                 ]
             };
-            agent.add(new Payload(agent.UNSPECIFIED, BraincoreData, {sendAsMessage: true, rawPayload: true}));
+            agent.add(new dfff.Payload(agent.UNSPECIFIED, BraincoreData, {sendAsMessage: true, rawPayload: true}));
             }
         
           // 18_Tentang_Mitra
@@ -236,7 +177,7 @@ app.post('/', express.json(), (req, res) => {
                 ]
                 ]
             };
-            agent.add(new Payload(agent.UNSPECIFIED, DataMitra, {sendAsMessage: true, rawPayload: true}));
+            agent.add(new dfff.Payload(agent.UNSPECIFIED, DataMitra, {sendAsMessage: true, rawPayload: true}));
             }
           // 03_AI_Sektor_Kesehatan
             const sektorKesehatan = (agent) => {
@@ -248,38 +189,56 @@ app.post('/', express.json(), (req, res) => {
             agent.add("Ya, Braincore dapat membantu mengembangkan pengenalan wajah. Braincore memiliki tim ahli di bidang pengenalan wajah yang berpengalaman dalam mengembangkan solusi pengenalan wajah.")
             }
           // 06_Biaya
-            const BiayaBraincore = (agent) => {
-            const responsebiaya = `
-        Sebelumnya Anda dapat melihat biaya pada website Braincore.id [https://braincore.id/consultation]
+          const BiayaBraincore = (agent) => {
+            const responsebiaya = {
+                "richContent": [
+                    [
+                        {
+                            "type": "info",
+                            "subtitle": "Biaya Layanan Braincore",
+                            "text": [
+                                "Sebelumnya Anda dapat melihat biaya pada website Braincore.id [https://braincore.id/consultation]",
+                                "Via Chat:",
+                                "- Rp0 (gratis selamanya)",
+                                "- Ceritakan kebutuhan proyek Anda",
+                                "- Bersama AI Consultant berpengalaman",
+                                "- Tanya jawab selama 24 jam",
+                                "Via Video Conference:",
+                                "- Rp150.000 per sesi",
+                                "- Bertatap muka secara virtual",
+                                "- Hands-on codingan",
+                                "- Saran terkait proyek AI",
+                                "- Best practice mengerjakan proyek AI",
+                                "- Diajarkan cara ngodingnya",
+                                "- Revisi minor 1x",
+                                "Custom Project:",
+                                "- Harga Spesial",
+                                "- Rancang bangun sistem AI",
+                                "- Dokumentasi proyek",
+                                "- Pembuatan arsitektur aplikasi",
+                                "- Diajarkan cara ngodingnya",
+                                "- Pengerjaan deployment ke Cloud",
+                                "- Revisi minor 3x",
+                                "Kurang lebih Anda bisa melihat langsung pada website Braincore pada bagian Konsultasi."
+                            ]
+                        },
+                        {
+                            "type": "chips",
+                            "options": [
+                                {
+                                    "text": "Konsultasi",
+                                    "link": "https://braincore.id/consultation"
+                                }
+                            ]
+                        }
+                    ]
+                ]
+            };
         
-        Via Chat:
-        - Rp0 (gratis selamanya)
-        - Ceritakan kebutuhan proyek Anda
-        - Bersama AI Consultant berpengalaman
-        - Tanya jawab selama 24 jam
-        
-        Via Video Conference:
-        - Rp150.000 per sesi
-        - Bertatap muka secara virtual
-        - Hands-on codingan
-        - Saran terkait proyek AI
-        - Best practice mengerjakan proyek AI
-        - Diajarkan cara ngodingnya
-        - Revisi minor 1x
-        
-        Custom Project:
-        - Harga Spesial
-        - Rancang bangun sistem AI
-        - Dokumentasi proyek
-        - Pembuatan arsitektur aplikasi
-        - Diajarkan cara ngodingnya
-        - Pengerjaan deployment ke Cloud
-        - Revisi minor 3x
-        
-        Kurang lebih Anda bisa melihat langsung pada website Braincore pada bagian Konsultasi.
-            `;
-            agent.add(new Payload(agent.UNSPECIFIED, responsebiaya , {sendAsMessage: true, rawPayload: true}))
+            agent.add(new dfff.Payload(agent.UNSPECIFIED, responsebiaya, { sendAsMessage: true, rawPayload: true }));
         };
+        
+
           // 07_Blockchain
             const blockchain = (agent) => {
             agent.add("Bisa dong! Braincore memiliki tim ahli di bidang blockchain dan berpengalaman dalam mengembangkan solusi blockchain.")
@@ -315,7 +274,7 @@ app.post('/', express.json(), (req, res) => {
                         ]
                     ]
                 };
-                agent.add(new Payload(agent.UNSPECIFIED, cancellationData, {sendAsMessage: true, rawPayload: true}));
+                agent.add(new dfff.Payload(agent.UNSPECIFIED, cancellationData, {sendAsMessage: true, rawPayload: true}));
             };
             
           // 09_Cara_melakukan_Konsultasi
@@ -360,7 +319,7 @@ app.post('/', express.json(), (req, res) => {
                 ]
             };
         
-            agent.add(new Payload(agent.UNSPECIFIED, caraData, {sendAsMessage: true, rawPayload: true}));
+            agent.add(new dfff.Payload(agent.UNSPECIFIED, caraData, {sendAsMessage: true, rawPayload: true}));
         };
         
           // 10_Jenis_Solusi_yang_ada
@@ -395,12 +354,12 @@ app.post('/', express.json(), (req, res) => {
                 ]
             };
         
-            agent.add(new Payload(agent.UNSPECIFIED, jawabanData, {sendAsMessage: true, rawPayload: true}));
+            agent.add(new dfff.Payload(agent.UNSPECIFIED, jawabanData, {sendAsMessage: true, rawPayload: true}));
         };
 
           // 11_Kontak_Braincore.id
             const Kontak_BraincoreId = (agent) => {
-            const kontakText = `
+            var kontakText = `
             Kontak yang bisa Anda hubungi antara lain:
         
             Location:
@@ -420,38 +379,34 @@ app.post('/', express.json(), (req, res) => {
 
         // 12_Layanan_dibraincore.id
         const LayananBraincoreId = (agent) => {
-            const layananText = `
-        - Konsultasi AI: Braincore.id menawarkan layanan konsultasi AI untuk membantu klien memahami kebutuhan mereka dan mengembangkan solusi AI yang sesuai.
-        - Pengembangan AI: Braincore.id menawarkan layanan pengembangan AI untuk membantu klien membangun solusi AI dari awal hingga selesai.
-        - Pembelajaran AI: Braincore.id menawarkan layanan pembelajaran AI untuk membantu klien memahami dan menguasai konsep-konsep dasar serta praktik terbaik dalam bidang kecerdasan buatan.
-        
-        Anda juga dapat melihat informasi lebih lanjut pada website Braincore.id di bagian layanan:
-        `;
-        
-            const layananData = {
+            agent.add(
+                "Braincore.id menawarkan berbagai layanan AI. Layanan konsultasi AI kami membantu klien memahami kebutuhan mereka dan mengembangkan solusi AI yang sesuai. Selain itu, kami juga menawarkan layanan pengembangan AI, di mana kami membantu klien membangun solusi AI dari awal hingga selesai. Terakhir, kami menawarkan layanan pembelajaran AI untuk membantu klien mempelajari cara menggunakan teknologi AI."
+            )
+            const response = {
                 "richContent": [
+
                     [
                         {
+                            "type": "chips",
                             "options": [
                                 {
+                                    "text": "Kunjungi Braincore.id",
                                     "link": "https://braincore.id/#services",
-                                    "text": "Braincore.id",
                                     "image": {
                                         "src": {
                                             "rawUrl": "https://braincore.id/static/images/braincore.png"
                                         }
                                     }
                                 }
-                            ],
-                            "type": "chips"
+                            ]
                         }
                     ]
                 ]
             };
         
-            agent.add(layananText);
-            agent.add(new Payload(agent.UNSPECIFIED, layananData, { sendAsMessage: true, rawPayload: true }));
+            agent.add(new dfff.Payload(agent.UNSPECIFIED, response, { sendAsMessage: true, rawPayload: true }));
         };
+        
         
         // 13_Pengelolaan_data
         const PengelolaanData = (agent) => {
@@ -495,7 +450,7 @@ app.post('/', express.json(), (req, res) => {
                 ]
                 ]
             }
-            agent.add(new Payload(agent.UNSPECIFIED, robotikaResponse, {sendAsMessage: true, rawPayload: true}))
+            agent.add(new dfff.Payload(agent.UNSPECIFIED, robotikaResponse, {sendAsMessage: true, rawPayload: true}))
             }
 
           // 17_Tentang_Braincore.id
@@ -545,7 +500,7 @@ app.post('/', express.json(), (req, res) => {
                     ]
                 ]
             };
-            agent.add(new Payload(agent.UNSPECIFIED, responsePayload, {sendAsMessage: true, rawPayload: true}));
+            agent.add(new dfff.Payload(agent.UNSPECIFIED, responsePayload, {sendAsMessage: true, rawPayload: true}));
         };
         
           // 21_Waktu_Pengembangan_AI
@@ -562,16 +517,14 @@ app.post('/', express.json(), (req, res) => {
                     ]
                 ]
             }
-            agent.add(new Payload(agent.UNSPECIFIED, development, {sendAsMessage: true, rawPayload: true}))
-            agent.add("Apakah Braincore dapat membantu untuk mengembangan Pengenalan wajah?")
+            agent.add(new dfff.Payload(agent.UNSPECIFIED, development, {sendAsMessage: true, rawPayload: true}))
             }
         
 
-    // Penanganan intent lainnya
+    // Penanganan intent lainnyas
 
     const intentMap = new Map();
-    intentMap.set("01_Welcome", demo);
-    intentMap.set("0_Fallback", handleFallback);
+    intentMap.set("Default Fallback Intent", handleFallback);
     intentMap.set("02_Lokasi_Braincore", lokasiBraincore);
     intentMap.set("03_AI_Sektor_Kesehatan", sektorKesehatan);
     intentMap.set("04_AI_pengenalan_wajah", PengenalanWajah);
@@ -582,13 +535,13 @@ app.post('/', express.json(), (req, res) => {
     intentMap.set("09_Cara_melakukan_Konsultasi", Cara_melakukan_Konsultasi);
     intentMap.set("10_Jenis_Solusi_yang_ada", JenisSolusi);
     intentMap.set("11_Kontak_Braincore.id", Kontak_BraincoreId);
-    intentMap.set("12_Layanan_dibraincore.id", LayananBraincoreId);
+    intentMap.set("12_Layanan dibraincore.id", LayananBraincoreId);
     intentMap.set("13_Pengelolaan_data", PengelolaanData);
     intentMap.set("14_Perpisahan", Perpisahan);
     intentMap.set("15_Robotika", robotika);
     intentMap.set("16_Tentang_Braincore.id", Tentang_Braincore);
     intentMap.set("17_Syarat_melakukan_Konsultasi", SyaratMelakukanKonsultasi);
-    intentMap.set("18_Tentang_Mitra", TentangMitra);
+    intentMap.set("18_Tentang_Mitra", TentangMitra);    
     intentMap.set("19_Text_Mining", textMining);
     intentMap.set("20_Waktu_Konsultasi", WaktuKonsultasi);
     intentMap.set("21_Waktu_Pengembangan_AI", waktuPengembangan);
