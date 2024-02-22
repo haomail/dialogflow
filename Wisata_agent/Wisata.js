@@ -68,7 +68,7 @@ app.post('/', express.json(), (req, res)=>{
                 ]
             ]
         };
-        agent.add(new Payload(agent.UNSPECIFIED, salamText, { sendAsMessage: true, rawPayload: true }));
+        agent.add(new dfff.Payload(agent.UNSPECIFIED, salamText, { sendAsMessage: true, rawPayload: true }));
     }
     
     
