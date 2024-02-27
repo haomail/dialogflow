@@ -408,6 +408,95 @@ app.post("/", express.json(), (request, response) => {
       agent.add("Kamu dapat membatalkan tiket melalui situs pemesanan online atau website kami. Namun, pastikan untuk memeriksa kebijakan pembatalan kami😊")
     };
 
+    // 15_Itinerary
+    const itinerary = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "Jadwal Perjalanan",
+              subtitle: "Kamu bisa klik langsung pesan ini untuk mengecek jadwal perjalanan melalui menu pemesanan tiket pada website kami👆",
+              actionLink: "https://example.com"
+            }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }))
+    };
+
+    // 16_Ticket_Price
+    const ticketPrice = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "Harga Tiket",
+              subtitle: "Harga tiket bus bervariasi tergantung jarak yang ditempuh. Kamu dapat klik pesan ini untuk mengecek harga dan memesan tiket melalui situs web kami👆",
+              actionLink: "https://example.com"
+            }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }))
+    };
+
+    // 17_Route_Information
+    const routeInformation = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "Informasi Rute",
+              subtitle: "Kamu dapat melihat rincian informasi rute transportasi dengan klik pesan ini👆",
+              actionLink: "https://example.com"
+            }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }))
+    };
+
+    // 18_Travel_Safety
+    const travelSavety = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "Keamanan Perjalanan",
+              subtitle: "Kami memiliki standar keamanan yang tinggi, termasuk pengemudi berlisensi, sistem pelacakan, dan pemeriksaan keamanan rutin pada armada kami👍"
+            }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }))
+    };
+
+    // 19_Discount
+    const discount = (agent) => {
+      agent.add("Kami seringkali menawarkan promo dan diskon khusus. Cek situs web atau langganan newsletter kami untuk mendapatkan informasi terbaru📫")
+    };
+    
+    // 20_Syarat dan Ketentuan
+    const termsAndConditions = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "Syarat dan Ketentuan",
+              subtitle: "Klik pesan ini untuk melihat syarat dan ketentuan perjalanan kami. Selain itu, dapat juga ditemukan sebelum anda konfirmasi pemesanan tiket perjalanan👆",
+              actionLink: "https://example.com"
+            }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }))
+    };
+
     const intentMap = new Map();
     intentMap.set('00_Welcome', welcome);
     intentMap.set('01_Demo', demo);
@@ -424,6 +513,12 @@ app.post("/", express.json(), (request, response) => {
     intentMap.set('12_About_Us', aboutUs);
     intentMap.set('13_Complaints', complaints);
     intentMap.set('14_Cancellation', cancellation);
+    intentMap.set('15_Itinerary', itinerary);
+    intentMap.set('16_Ticket_Price', ticketPrice);
+    intentMap.set('17_Route_Information', routeInformation);
+    intentMap.set('18_Travel_Safety', travelSavety);
+    intentMap.set('19_Discount', discount);
+    intentMap.set('20_Terms_And_Conditions', termsAndConditions);
     agent.handleRequest(intentMap);
 });
 
