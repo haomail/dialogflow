@@ -217,7 +217,7 @@ app.post("/", express.json(), (request, response) => {
               type: "list",
               title: "Antar Jemput",
               event: {
-                name: "",
+                name: "shuttle",
                 languageCode: "",
                 parameters: {}
               }
@@ -229,7 +229,7 @@ app.post("/", express.json(), (request, response) => {
               type: "list",
               title: "Destinasi Populer",
               event: {
-                name: "",
+                name: "destinations",
                 languageCode: "",
                 parameters: {}
               }
@@ -328,6 +328,40 @@ app.post("/", express.json(), (request, response) => {
           console.log("Reservation added to Firebase"));
     };
 
+    // 10_Shuttle
+    const shuttle = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "Antar Jemput",
+              subtitle: "Kami menyediakan antar jemput dari bandara atau stasiun tertentu. Informasi selengkapnya dapat kamu lihat dengan klik pesan ini👆",
+              actionLink: "https://example.com"
+            }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
+    };
+
+    // 11_Popular_Destinations
+    const popularDestinations = (agent) => {
+      const responses = {
+        richContent: [
+          [
+              {
+                type: "info",
+                title: "Destinasi Populer",
+                subtitle: "Kami melayani berbagai destinasi populer. Rute selengkapnya dapat kamu lihat dengan klik pesan ini👆",
+                actionLink: "https://example.com"
+              }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
+    };
+
     const intentMap = new Map();
     intentMap.set('00_Welcome', welcome);
     intentMap.set('01_Demo', demo);
@@ -339,6 +373,8 @@ app.post("/", express.json(), (request, response) => {
     intentMap.set('07_Luggage', luggage);
     intentMap.set('08_Membership', membership);
     intentMap.set('09_Reservation', reservation);
+    intentMap.set('10_Shuttle', shuttle);
+    intentMap.set('11_Popular_Destinations', popularDestinations);
     agent.handleRequest(intentMap);
 });
 
