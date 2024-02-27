@@ -384,6 +384,30 @@ app.post("/", express.json(), (request, response) => {
       agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
     };
 
+    // 13_Complaints
+    const complaints = (agent) => {
+      const name = agent.parameters.name.name;
+      const phoneNumber = agent.parameters.phonenumber;
+      const complaints = agent.parameters.complaints;
+      console.log(name);
+      console.log(phoneNumber);
+      console.log(complaints);
+
+      agent.add(`Sekali lagi kami meminta maaf atas ketidaknyamanannya kak ${name} terkait ${complaints}🙏\n 
+      Pegawai kami akan segera menghubungi kakak di nomor telepon ${phoneNumber}`);
+      return db.collection("complaints").add({
+      name: name,
+      phoneNumber: phoneNumber,
+      complaints: complaints
+      }).then(ref=>
+          console.log("Complaints added to Firebase"));
+    };
+
+    // 14_Cancellation
+    const cancellation = (agent) => {
+      agent.add("Kamu dapat membatalkan tiket melalui situs pemesanan online atau website kami. Namun, pastikan untuk memeriksa kebijakan pembatalan kami😊")
+    };
+
     const intentMap = new Map();
     intentMap.set('00_Welcome', welcome);
     intentMap.set('01_Demo', demo);
@@ -398,6 +422,8 @@ app.post("/", express.json(), (request, response) => {
     intentMap.set('10_Shuttle', shuttle);
     intentMap.set('11_Popular_Destinations', popularDestinations);
     intentMap.set('12_About_Us', aboutUs);
+    intentMap.set('13_Complaints', complaints);
+    intentMap.set('14_Cancellation', cancellation);
     agent.handleRequest(intentMap);
 });
 
