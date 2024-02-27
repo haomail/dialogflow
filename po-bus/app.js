@@ -72,7 +72,7 @@ app.post("/", express.json(), (request, response) => {
           ]
         ]
       };
-      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true }));
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
     };
 
     // 01_Demo
@@ -101,27 +101,10 @@ app.post("/", express.json(), (request, response) => {
         ]
       };
       agent.add("Untuk memesan, Anda dapat memesan langsung dari website ini atau melalui aplikasi pemesanan tiket sebagai berikut:");
-      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true }));
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
     };
     
-
-    // 03_Website_Booking
-    const websiteBooking = (agent) => {
-        const responses = {
-            richContent: [
-                [
-                    {
-                        type: "info",
-                        subtitle: "Klik pesan ini untuk memesan tiket melalui website kami",
-                        actionLink: "https://example.com"
-                    }
-                ]
-            ]
-        }
-        agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true }));
-    };
-
-    // 04_App_Booking
+    // 03_App_Booking
     const appBooking = (agent) => {
         agent.add("Langsung pesan tiket perjalanan melalui aplikasi favoritmu!")
         const responses = {
@@ -162,15 +145,200 @@ app.post("/", express.json(), (request, response) => {
                 ],
               ],
             };
-        agent.add(new Payload(agent.UNSPECIFIED, responses, {sendAsMessage: true, rawPayload: true}));
+        agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
+    };
+
+    // 04_Services
+    const services = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "list",
+              title: "Kelas Tiket",
+              event: {
+                name: "ticket_class",
+                languageCode: "",
+                parameters: {}
+              }
+            },
+            {
+              type: "divider"
+            },
+            {
+              type: "list",
+              title: "Fasilitas",
+              event: {
+                name: "facility",
+                languageCode: "",
+                parameters: {}
+              }
+            },
+            {
+              type: "divider"
+            },
+            {
+              type: "list",
+              title: "Informasi Bagasi",
+              event: {
+                name: "luggage",
+                languageCode: "",
+                parameters: {}
+              }
+            },
+            {
+              type: "divider"
+            },
+            {
+              type: "list",
+              title: "Keanggotaan",
+              event: {
+                name: "membership",
+                languageCode: "",
+                parameters: {}
+              }
+            },
+            {
+              type: "divider"
+            },
+            {
+              type: "list",
+              title: "Reservasi",
+              event: {
+                name: "reservation",
+                languageCode: "",
+                parameters: {}
+              }
+            },
+            {
+              type: "divider"
+            },
+            {
+              type: "list",
+              title: "Antar Jemput",
+              event: {
+                name: "",
+                languageCode: "",
+                parameters: {}
+              }
+            },
+            {
+              type: "divider"
+            },
+            {
+              type: "list",
+              title: "Destinasi Populer",
+              event: {
+                name: "",
+                languageCode: "",
+                parameters: {}
+              }
+            }
+          ]
+        ]
+      }
+      agent.add("Pilih layanan kami yang sesuai dengan kebutuhanmu✈️");
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
+    };
+
+    // 05_Ticket_Class
+    const classes = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "Kelas Tiket",
+              subtitle: "Kami menyediakan beberapa kelas yang dapat kamu pilih sesuai preferensimu. Kamu bisa mengeceknya dengan klik pesan ini👆",
+              actionLink: "https://example.com"
+            }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
+    };
+
+    // 06_Facility
+    const facility = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "Fasilitas",
+              subtitle: `Transportasi kami dilengkapi dengan kursi yang nyaman, WiFi, colokan listrik, AC, pantry, selimut*, snack* dan makanan berat*. Kami berusaha memberikan pengalaman perjalanan yang nyaman.
+              \n *Tergantung kelas transportasi yang kamu pesan.`
+            }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
+    };
+
+    // 07_Luggage
+    const luggage = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "Informasi Bagasi",
+              subtitle: "Berat maksimal bagasi untuk setiap penumpang bergantung kepada transportasi yang dinaiki. Informasi selengkapnya dapat kamu cek dengan klik pesan ini👆",
+              actionLink: "https://example.com"
+            }
+          ]
+        ]
+      };
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
+    };
+
+    // 08_Membership
+    const membership = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "info",
+              title: "Keanggotaan",
+              subtitle: "Dengan menjadi member keanggotaan, banyak diskon dan promo yang akan menantimu! Informasi selengkapnya dapat kamu lihat dengan klik pesan ini👆",
+              actionLink: "https://example.com"
+            }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
+    };
+
+    // 09_Reservation
+    const reservation = (agent) => {
+      const phoneNumber = agent.parameters.phonenumber;
+      const name = agent.parameters.name.name;
+      const details = agent.parameters.details;
+      console.log(phoneNumber);
+      console.log(name);
+      console.log(details);
+
+      agent.add(`Berikut nomor telepon ${phoneNumber} dengan kak ${name} untuk keperluan ${details}. Pegawai kami akan segera menghubungi anda untuk reservasi transportasi kami. \n 
+      Terima kasih dan semoga harimu menyenangkan!😊`);
+      return db.collection("reservation").add({
+      phoneNumber: phoneNumber,
+      name: name,
+      details: details
+      }).then(ref=>
+          console.log("Reservation added to Firebase"));
     };
 
     const intentMap = new Map();
     intentMap.set('00_Welcome', welcome);
     intentMap.set('01_Demo', demo);
     intentMap.set('02_Ticket_Booking', ticketBooking);
-    intentMap.set('03_Website_Booking', websiteBooking);
-    intentMap.set('04_App_Booking', appBooking);
+    intentMap.set('03_App_Booking', appBooking);
+    intentMap.set('04_Services', services);
+    intentMap.set('05_Ticket_Class', classes);
+    intentMap.set('06_Facility', facility);
+    intentMap.set('07_Luggage', luggage);
+    intentMap.set('08_Membership', membership);
+    intentMap.set('09_Reservation', reservation);
     agent.handleRequest(intentMap);
 });
 
