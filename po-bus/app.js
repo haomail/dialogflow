@@ -82,38 +82,28 @@ app.post("/", express.json(), (request, response) => {
 
     // 02_Ticket_Booking
     const ticketBooking = (agent) => {
-      agent.add("Untuk memesan, Anda dapat memesan langsung dari website ini atau melalui aplikasi pemesanan tiket sebagai berikut:")
-        const responses = {
-            richContent: [
-              [
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "chips",
+              options: [
                 {
-                  type: "list",
-                  title: "Website",
-                  subtitle: "Pesan langsung melalui website kami",
-                  event: {
-                    name: "website_booking",
-                    languageCode: "",
-                    parameters: {}
-                  }
+                  text: "Website",
+                  link: "https://example.com"
                 },
                 {
-                  type: "divider"
+                  text: "Aplikasi Pemesanan Tiket"
                 },
-                {
-                  type: "list",
-                  title: "Aplikasi Pemesanan Tiket",
-                  subtitle: "Pesan tiket di aplikasi andalanmu",
-                  event: {
-                    name: "app_booking",
-                    languageCode: "",
-                    parameters: {}
-                  }
-                }
-              ]
-            ]
-          }
-        agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true }));
+              ],
+            }
+          ]
+        ]
+      };
+      agent.add("Untuk memesan, Anda dapat memesan langsung dari website ini atau melalui aplikasi pemesanan tiket sebagai berikut:");
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true }));
     };
+    
 
     // 03_Website_Booking
     const websiteBooking = (agent) => {
