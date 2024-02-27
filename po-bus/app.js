@@ -362,6 +362,28 @@ app.post("/", express.json(), (request, response) => {
       agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
     };
 
+    // 12_About_Us
+    const aboutUs = (agent) => {
+      const responses = {
+        richContent: [
+          [
+            {
+              type: "image",
+              rawUrl: "https://media.istockphoto.com/id/174870355/photo/visual-representation-of-transportation-modes.jpg?s=612x612&w=0&k=20&c=IjL0uThZwQHau2TKnBseS_lAFRxVObjmN7o_GRuUB0E="
+            },
+            {
+              type: "info",
+              title: "TravelMate",
+              subtitle: `Perusahaan transportasi kami didirikan dengan komitmen untuk memberikan layanan yang handal dan efisien kepada pelanggan👨‍👩‍👧‍👦 \n
+              Dengan armada kendaraan yang modern dan tim profesional yang berpengalaman, kami berusaha untuk memenuhi kebutuhan transportasi dengan tepat waktu dan aman✅ \n
+              Inovasi terus menjadi fokus kami dalam mengembangkan solusi transportasi yang ramah lingkungan dan meningkatkan kualitas hidup masyarakat🌿`
+            }
+          ]
+        ]
+      }
+      agent.add(new Payload(agent.UNSPECIFIED, responses, { sendAsMessage: true, rawPayload: true, platform: "PLATFORM_UNSPECIFIED" }));
+    };
+
     const intentMap = new Map();
     intentMap.set('00_Welcome', welcome);
     intentMap.set('01_Demo', demo);
@@ -375,6 +397,7 @@ app.post("/", express.json(), (request, response) => {
     intentMap.set('09_Reservation', reservation);
     intentMap.set('10_Shuttle', shuttle);
     intentMap.set('11_Popular_Destinations', popularDestinations);
+    intentMap.set('12_About_Us', aboutUs);
     agent.handleRequest(intentMap);
 });
 
